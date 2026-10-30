@@ -202,17 +202,17 @@ Na interface foram conferidas troca de modelos, alteração de valor/máscara, i
 
 Não há suporte nesta versão a código de barras, QR Code, imagens, quebra de linha, ajuste automático de fonte, expressões ou scripts no layout. Tipografia e densidade efetiva de uma etiqueta pequena precisam ser confirmadas no material final.
 
-## Publicar como repositório separado
+## Clonar o projeto
 
-Esta pasta é independente do projeto vizinho. Não contém configuração de remoto nem credenciais. `build/` e `output/` estão no `.gitignore`; os resultados são reproduzidos pelos scripts. Para iniciar seu repositório, execute **dentro desta pasta**:
+O projeto é independente e não contém credenciais. `build/` e `output/` estão no `.gitignore`; os resultados são reproduzidos pelos scripts.
 
 ```sh
-git init
-git add .
-git commit -m "Add typed label layouts and Pascal printing demo"
+git clone https://github.com/AdecioJunior/thermal-label-layout.git
+cd thermal-label-layout
+lazbuild labelDemo.lpi
 ```
 
-Depois, associe o remoto público que você criar no GitHub. Nenhum commit ou envio é feito pelos scripts deste projeto.
+Abra `labelDemo.lpi` no Lazarus ou execute o binário gerado em `build/` para iniciar o painel. As instruções de execução, os parâmetros da CLI e os testes estão descritos acima.
 
 ## Referências técnicas
 
