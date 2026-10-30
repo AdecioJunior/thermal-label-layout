@@ -1,0 +1,13 @@
+* text=auto
+*.pas text eol=lf
+*.dpr text eol=lf
+*.lpr text eol=lf
+*.lpi text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.py text eol=lf
+*.lay text eol=lf
+*.ini text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf

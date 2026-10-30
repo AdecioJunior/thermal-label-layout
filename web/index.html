@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratório de etiquetas</title>
+  <link rel="stylesheet" href="/panel.css">
+  <script src="/panel.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brandMark" aria-hidden="true">▤</span><div><span class="eyebrow">THERMAL LABEL LAYOUT</span><h1>Laboratório de etiquetas</h1></div></div>
+    <div class="headerActions"><span class="connection" id="connection">Conectando…</span><button id="importLayout">Abrir .lay</button><button id="downloadLayout">Baixar .lay</button><button class="primary" id="generatePreview">Gerar prévia <span aria-hidden="true">↗</span></button></div>
+    <input type="file" id="layoutFile" accept=".lay,text/plain" hidden>
+  </header>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Configuração da etiqueta">
+      <section class="card intro"><span class="step">01 / ESCOLHA UM PONTO DE PARTIDA</span><h2>Sua etiqueta, suas medidas.</h2><p>Edite o layout, preencha os dados e veja como o lote se organiza na página.</p><div class="presets" aria-label="Modelos de colunas"><button data-preset="3">3 colunas</button><button data-preset="5">5 colunas</button><button data-preset="6" class="selected">6 colunas</button></div></section>
+      <details class="card" open><summary>Página e etiquetas <span>mm</span></summary><div class="sectionBody">
+        <label>Nome do layout<input id="layoutName" autocomplete="off"></label>
+        <div class="formGrid"><label>Página · largura<input id="pageWidthMm" type="number" min="1" max="500" step="0.1"></label><label>Página · altura<input id="pageHeightMm" type="number" min="1" max="500" step="0.1"></label><label>Etiqueta · largura<input id="labelWidthMm" type="number" min="0.1" step="0.1"></label><label>Etiqueta · altura<input id="labelHeightMm" type="number" min="0.1" step="0.1"></label><label>Colunas<input id="columns" type="number" min="1" max="1000"></label><label>Intervalo entre colunas<input id="columnGapMm" type="number" min="0" step="0.1"></label><label>Intervalo entre linhas<input id="rowGapMm" type="number" min="0" step="0.1"></label></div>
+        <p class="groupLabel">Margens da página</p><div class="formGrid"><label>Esquerda<input id="marginLeftMm" type="number" min="0" step="0.1"></label><label>Superior<input id="marginTopMm" type="number" min="0" step="0.1"></label><label>Direita<input id="marginRightMm" type="number" min="0" step="0.1"></label><label>Inferior<input id="marginBottomMm" type="number" min="0" step="0.1"></label></div>
+      </div></details>
+      <details class="card" open><summary>Campos da etiqueta <span id="fieldCount"></span></summary><div class="sectionBody">
+        <div class="fieldPicker"><label>Campo selecionado<select id="selectedField"></select></label><button id="addField" title="Adicionar campo" aria-label="Adicionar campo">+</button><button id="removeField" title="Remover campo" aria-label="Remover campo">−</button></div>
+        <div class="formGrid"><label>Nome do campo<input id="fieldName" autocomplete="off"></label><label>Origem<select id="fieldSource"><option value="fixed">Texto / valor fixo</option><option value="variable">Dado variável</option></select></label><label>Tipo de informação<select id="fieldType"><option value="text">Texto</option><option value="date">Data</option><option value="decimal">Valor decimal</option><option value="integer">Número inteiro</option></select></label><label id="bindingLabel">Chave nos dados<input id="fieldBind" autocomplete="off"></label></div>
+        <label id="fixedValueLabel">Valor fixo<input id="fieldValue" autocomplete="off"></label>
+        <div class="sampleEditor" id="sampleEditor"><label>Valor de teste<input id="sampleValue" autocomplete="off"></label><button id="applySample">Aplicar ao lote</button></div>
+        <p class="hint" id="typeHint"></p>
+        <label>Máscara de formatação<input id="fieldMask" placeholder="Ex.: dd/mm/yy, #,##0.00 ou {value}" autocomplete="off"></label>
+        <div class="formGrid"><label>Prefixo<input id="fieldPrefix" autocomplete="off"></label><label>Sufixo<input id="fieldSuffix" autocomplete="off"></label><label>Posição X · mm<input id="fieldX" type="number" min="0" step="0.1"></label><label>Posição Y · mm<input id="fieldY" type="number" min="0" step="0.1"></label><label>Largura · mm ou auto<input id="fieldWidth" autocomplete="off"></label><label>Altura · mm<input id="fieldHeight" type="number" min="0.1" step="0.1"></label><label>Fonte<input id="fieldFont" autocomplete="off"></label><label>Tamanho · pt<input id="fieldFontSize" type="number" min="0.1" max="72" step="0.5"></label><label>Alinhamento<select id="fieldAlign"><option value="left">Esquerda</option><option value="center">Centro</option><option value="right">Direita</option></select></label></div>
+        <div class="checkRow"><label><input id="fieldBold" type="checkbox"> Negrito</label><label><input id="fieldRequired" type="checkbox"> Obrigatório</label></div>
+      </div></details>
+      <details class="card"><summary>Lote e formatação</summary><div class="sectionBody"><div class="formGrid"><label>Quantidade de registros<input id="recordCount" type="number" min="1" max="200" value="13"></label><label>DPI<select id="dpi"><option value="203">203 DPI</option><option value="300">300 DPI</option><option value="600">600 DPI</option></select></label><label>Posições iniciais usadas<input id="startIndex" type="number" min="0" value="2"></label><label>Separador decimal<select id="decimalSeparator"><option value=",">Vírgula · 1.250,50</option><option value=".">Ponto · 1,250.50</option></select></label></div><button id="resizeBatch">Atualizar quantidade do lote</button><p class="hint">Ao aumentar o lote, novos registros copiam o primeiro. A sequência é incrementada quando sua chave é “sequencia”.</p></div></details>
+    </aside>
+    <main class="previewArea">
+      <div class="previewHeading"><div><span class="step">02 / EXPERIMENTE O RESULTADO</span><h2>Prévia de impressão</h2><p id="batchSummary">Preparando seu primeiro layout…</p></div><span id="revision" class="revision">Aguardando</span></div>
+      <div class="toolbar"><label class="toggle"><input id="showGuides" type="checkbox" checked> Mostrar áreas e guias</label><label>Zoom <select id="zoom"><option value="1">100%</option><option value="1.5" selected>150%</option><option value="2">200%</option></select></label><button id="printPreview" disabled>Imprimir / PDF</button><button id="downloadSvg" title="Baixar o SVG da primeira página" disabled>Baixar SVG</button></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite">Conectando ao gerador de etiquetas…</div>
+      <div class="pages" id="pages"><div class="emptyState"><span aria-hidden="true">▤</span><h3>Seu layout aparece aqui</h3><p>Escolha um modelo e clique em “Gerar prévia”.</p></div></div>
+      <p class="previewNote">A prévia simula a página inteira como imprimível. Fontes e legibilidade final também dependem do driver, da impressora e do material utilizado.</p>
+      <details class="sourceCard"><summary>Ver e editar os arquivos <span>.lay + dados</span></summary><p>Os controles acima preenchem o .lay. Você também pode editar o texto e aplicar suas alterações.</p><div class="sourceGrid"><div><label>Layout .lay<textarea id="layoutSource" spellcheck="false"></textarea></label><button id="applyLayoutSource">Aplicar .lay e gerar prévia</button></div><div><label>Dados do lote · INI<textarea id="dataSource" spellcheck="false"></textarea></label><button id="applyDataSource">Aplicar dados e gerar prévia</button><button id="downloadData">Baixar dados</button></div></div></details>
+    </main>
+  </div>
+</body>
+</html>

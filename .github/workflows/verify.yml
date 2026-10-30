@@ -1,0 +1,13 @@
+name: Pascal core
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Free Pascal
+        run: sudo apt-get update && sudo apt-get install -y fp-compiler fp-units-fcl fp-units-net
+      - name: Compile and verify
+        run: sh scripts/verify.sh
+      - name: Verify local panel
+        run: python3 tests/panelSmoke.py

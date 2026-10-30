@@ -1,0 +1,17 @@
+/build/
+/output/
+*.dcu
+*.ppu
+*.o
+*.exe
+*.compiled
+*.local
+*.identcache
+*.dproj.local
+*.lps
+backup/
+*.stat
+*.bak
+__history/
+__recovery/
+__pycache__/
