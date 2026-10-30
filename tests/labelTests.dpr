@@ -3,7 +3,8 @@ program labelTests;
 {$IFDEF FPC}{$mode delphi}{$H+}{$codepage utf8}{$ENDIF}
 {$APPTYPE CONSOLE}
 
-uses SysUtils, Classes, Math, labelTypes, labelUtils, labelLayout, labelData,
+uses {$IFDEF UNIX}cwstring,{$ENDIF}
+  SysUtils, Classes, Math, labelTypes, labelUtils, labelLayout, labelData,
   labelGeometry, labelFormatting, labelPlan, labelSvg;
 
 type
@@ -254,6 +255,7 @@ begin
 end;
 
 begin
+  SetMultiByteConversionCodePage(CP_UTF8);
   try
     quantidadeTestes := 0;
     quantidadeVerificacoes := 0;

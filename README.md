@@ -8,6 +8,8 @@ Inclui um painel visual para criar e experimentar arquivos `.lay`: etiquetas com
 
 Leia o artigo técnico: [TPrinter: tão antigo quanto funcional](docs/artigo-tprinter.md).
 
+Publicado também no [LinkedIn](https://www.linkedin.com/pulse/tprinter-t%25C3%25A3o-antigo-quanto-funcional-adecio-cavalheiro-junior-8wjtf/).
+
 ## Executar sem impressora
 
 ### Pela IDE Lazarus

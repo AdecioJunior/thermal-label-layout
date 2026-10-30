@@ -3,7 +3,7 @@ program labelDemo;
 {$IFDEF FPC}{$mode delphi}{$H+}{$codepage utf8}{$ENDIF}
 {$APPTYPE CONSOLE}
 
-uses {$IFDEF UNIX}cthreads,{$ENDIF}
+uses {$IFDEF UNIX}cthreads, cwstring,{$ENDIF}
   SysUtils, labelTypes, labelLayout, labelData, labelGeometry, labelPlan, labelSvg, labelPanel;
 
 var layout: TDocumentoLayout; dados: TRegistrosDados; metricas: TMetricasImpressao;
